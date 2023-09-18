@@ -1,0 +1,18 @@
+button {
+  color: white;
+  background-color: #25a18e;
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  padding: 16px 32px;
+}
+
+button.btn-delete {
+  background-color: red;
+  width: 100px;
+}
+
+button:hover {
+  filter: brightness(90%);
+}

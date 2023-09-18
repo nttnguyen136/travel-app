@@ -9,27 +9,30 @@
 </head>
 
 <body>
-  <div id="app">
-    <div class="holder headline"> Travel App </div>
-
-    <div class="holder zip">
-      <label for="zip">Enter Zipcode here</label>
-      <input type="text" id="zip" placeholder="enter zip code here" />
-    </div>
-    <div class="holder feel">
-      <label for="feelings">How are you feeling today?</label>
-      <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
-      <button id="generate" type="submit">Generate</button>
-    </div>
-    <div class="holder entry">
-      <div class="title">Most Recent Entry</div>
-      <div id="entryHolder">
-        <div id="date">..</div>
-        <div id="temp">..</div>
-        <div id="content">..</div>
-      </div>
-    </div>
+  <div class="header">
+    <h1> Travel Planning </h1>
   </div>
+
+  <main id="app" class="app">
+    <section class="form">
+
+      <div class="input">
+        <label for="place" class="label-place">My trip to:</label>
+        <input type="text" id="location" placeholder="Enter location here">
+      </div>
+      <div class="input">
+        <label for="date" class="label-date">Departing:</label>
+        <input type="date" name="date" id="date">
+      </div>
+      <button id="generate" type="button">Generate</button>
+
+    </section>
+
+    <section class="results" id="results">
+
+    </section>
+  </main>
+
 </body>
 
 </html>
