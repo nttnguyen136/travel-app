@@ -7,7 +7,6 @@ const fetch = require("node-fetch");
 
 dotenv.config();
 
-const PORT = 8080;
 const GEO_NAMES_KEY = process.env.GEO_NAMES_KEY;
 const PIXABAY_KEY = process.env.PIXABAY_KEY;
 const WEATHERBIT_KEY = process.env.WEATHERBIT_KEY;
@@ -22,6 +21,12 @@ app.use(express.static("dist"));
 
 app.get("/", function (req, res) {
   res.sendFile("../dist/index.html");
+});
+
+app.get("/test", function (req, res) {
+  res.status(200).send({
+    status: "success",
+  });
 });
 
 app.post("/generate", async function (req, res) {
@@ -78,12 +83,6 @@ app.delete("/trips", async function (req, res) {
   res.status(201).json("OK");
 });
 
-// designates what port the app will listen to for incoming requests
-app.listen(PORT, () => {
-  console.log("Server running...");
-  console.log(`Running on localhost: ${PORT}`);
-});
-
 async function getCoordinates(location, username) {
   const res = await fetch(
     "http://api.geonames.org/searchJSON?q=" +
@@ -112,16 +111,9 @@ async function getCoordinates(location, username) {
 }
 
 async function getImage(location, apiKey) {
-  const res = await fetch(
-    `https://pixabay.com/api/?key=${apiKey}&q=${location}`
-  );
-
-  try {
-    const apiData = await res.json();
-    const data = apiData.hits[0]?.largeImageURL;
-
-    return data;
-  } catch (error) {}
+  return fetch(`https://pixabay.com/api/?key=${apiKey}&q=${location}`)
+    .then((res) => res.json())
+    .then((data) => data.hits[0]?.largeImageURL);
 }
 
 async function getWeather(lat, lon, apiKey) {
@@ -131,3 +123,5 @@ async function getWeather(lat, lon, apiKey) {
     .then((res) => res.json())
     .then((res) => (res.count > 0 ? res.data[0] : null));
 }
+
+module.exports = app;
