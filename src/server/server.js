@@ -72,7 +72,7 @@ app.post("/generate", async function (req, res) {
 });
 
 app.get("/trips", async function (req, res) {
-  res.status(201).send(trips);
+  res.status(200).send(trips);
 });
 
 app.delete("/trips", async function (req, res) {
@@ -80,7 +80,7 @@ app.delete("/trips", async function (req, res) {
 
   trips = trips.filter((item) => item.id != id);
 
-  res.status(201).json("OK");
+  res.status(200).json("OK");
 });
 
 async function getCoordinates(location, username) {
