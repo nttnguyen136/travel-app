@@ -1,5 +1,7 @@
-import { getCoordinatesFromApi, getImage } from "./api";
+import { getCoordinatesFromApi, getImage, postData } from "./api";
 import createTripElement from "./updateUI";
+
+const trips = {};
 
 async function handleSubmitForm() {
   const location = document.getElementById("location").value;
@@ -15,21 +17,16 @@ async function handleSubmitForm() {
     return;
   }
 
-  const data = await getCoordinatesFromApi(location, "demo");
+  const data = await postData("http://localhost:8080/generate", {
+    location,
+    date,
+  });
 
   if (!data) {
     return;
   }
 
-  const image = await getImage(data.city);
-
-  const trip = createTripElement(
-    data,
-    image ||
-      "https://westernfordhcm.com.vn/wp-content/uploads/2019/03/trip-a-la-gi-trip-b-la-gi.jpg",
-    location,
-    date
-  );
+  const trip = createTripElement(data);
 
   document.querySelector("#results").appendChild(trip);
 }
