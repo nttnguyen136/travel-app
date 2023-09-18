@@ -10,6 +10,7 @@ dotenv.config();
 const PORT = 8080;
 const GEO_NAMES_KEY = process.env.GEO_NAMES_KEY;
 const PIXABAY_KEY = process.env.PIXABAY_KEY;
+const WEATHERBIT_KEY = process.env.WEATHERBIT_KEY;
 
 let trips = [];
 
@@ -41,6 +42,15 @@ app.post("/generate", async function (req, res) {
   }
 
   resData = { ...coordinatesRes, date };
+  const weatherData = await getWeather(
+    coordinatesRes.latitude,
+    coordinatesRes.longitude,
+    WEATHERBIT_KEY
+  );
+
+  if (weatherData) {
+    resData.weather = weatherData.weather;
+  }
 
   const image = await getImage(location, PIXABAY_KEY);
 
@@ -84,6 +94,7 @@ async function getCoordinates(location, username) {
 
   try {
     const apiData = await res.json();
+
     const data = {
       latitude: apiData.geonames[0].lat,
       longitude: apiData.geonames[0].lng,
@@ -93,7 +104,7 @@ async function getCoordinates(location, username) {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       error,
     };
@@ -111,4 +122,12 @@ async function getImage(location, apiKey) {
 
     return data;
   } catch (error) {}
+}
+
+async function getWeather(lat, lon, apiKey) {
+  return fetch(
+    `http://api.weatherbit.io/v2.0/current?key=${apiKey}&lat=${lat}&lon=${lon}`
+  )
+    .then((res) => res.json())
+    .then((res) => (res.count > 0 ? res.data[0] : null));
 }

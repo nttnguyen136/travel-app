@@ -1,7 +1,5 @@
-import { getCoordinatesFromApi, getImage, postData } from "./api";
+import { postData } from "./api";
 import createTripElement from "./updateUI";
-
-const trips = {};
 
 async function handleSubmitForm() {
   const location = document.getElementById("location").value;

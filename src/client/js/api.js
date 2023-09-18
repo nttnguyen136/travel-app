@@ -26,4 +26,15 @@ async function deleteData(url, data) {
   return await response.json();
 }
 
-export { postData, deleteData };
+async function getAllTrips() {
+  return fetch("http://localhost:8080/trips", {
+    method: "GET",
+    credentials: "same-origin",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
+}
+
+export { postData, deleteData, getAllTrips };
