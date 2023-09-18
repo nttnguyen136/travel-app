@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Travel App</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <title> Travel App </title>
-  <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
+  <body>
+    <div class="header">
+      <h1>Travel Planning</h1>
+    </div>
 
-<body>
-  <div class="header">
-    <h1> Travel Planning </h1>
-  </div>
+    <main id="app" class="app">
+      <section class="form">
+        <div class="input">
+          <label for="place" class="label-place">My trip to:</label>
+          <input type="text" id="location" placeholder="Enter location here" />
+        </div>
+        <div class="input">
+          <label for="date" class="label-date">Departing:</label>
+          <input type="date" name="date" id="date" />
+        </div>
+        <button id="generate" type="button">Generate</button>
+      </section>
 
-  <main id="app" class="app">
-    <section class="form">
-
-      <div class="input">
-        <label for="place" class="label-place">My trip to:</label>
-        <input type="text" id="location" placeholder="Enter location here">
-      </div>
-      <div class="input">
-        <label for="date" class="label-date">Departing:</label>
-        <input type="date" name="date" id="date">
-      </div>
-      <button id="generate" type="button">Generate</button>
-
-    </section>
-
-    <section class="results" id="results">
-
-    </section>
-  </main>
-
-</body>
-
+      <section class="results" id="results"></section>
+    </main>
+  </body>
 </html>
